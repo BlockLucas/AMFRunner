@@ -1,22 +1,13 @@
 import java.io.{File, FileNotFoundException}
 
-import scala.concurrent._
-import ExecutionContext.Implicits.global
-
-import amf.core.remote.{Platform, RamlYamlHint}
-import amf.core.unsafe.PlatformBuilder
-import amf.facades.{AMFCompiler, Validation}
-import amf.{AMF, ProfileNames}
-import amf.model.document.BaseUnit
-import amf.plugins.document.webapi.RAML10Plugin
+import amf.client.AMF
+import amf.client.model.document.BaseUnit
 import core.APIS._
 import helper.amf_helper.{AmfParsingHelper, AmfResolutionHelper, AmfValidationHelper}
-import helper.java_parser_helper.RamlParsingValidationHelper
 import helper.swagger_parser_validator.{SwaggerParsingHelper, SwaggerValidationHelper}
 import helper.yaml_helper.YamlParsingHelper
 
 import scala.collection.JavaConverters._
-import scala.concurrent.Future
 import org.raml.parser.visitor.RamlValidationService
 
 object App {
@@ -31,15 +22,14 @@ object App {
   val SWAGGER_VALIDATION: Boolean = false
 
 
-  val apiPath: String = "/Users/lucas.block/mulesoft/AMFScalaRunnerV2/run/testfile.raml"
-//  val apiPath: String = "/Users/lucas.block/mulesoft/AMFScalaRunnerV2/run/platformCP/api.raml"
-//  val apiPath: String = "/Users/lucas.block/mulesoft/AMFScalaRunnerV2/run/api_7898_ver_8051/pad_lab7.raml"
-//  val apiPath2: String = "/Users/lucas.block/mulesoft/PlatformSnapshotAll-plus/small/part1/org_f795d042-f833-4f57-bec3-75d17d17f4d8/api_5077_ver_5072/recommender.raml"
-//  val apiPath: String = "/Users/lucas.block/mulesoft/TroubleFiles/StackOverFlow/api.raml"
-//  val apiPath: String = "/Users/lucas.block/mulesoft/NewYork/client-contracts-modified/client-contracts.raml"
-//  val apiPath: String = "/Users/lucas.block/mulesoft/NewYork/client-contracts/client-contracts.raml"
-//  val apiPath: String = "/Users/lucas.block/mulesoft/current/API/responses_Rv1-0.raml"
-//  val apiPath: String = "/Users/lucas.block/mulesoft/raml-tck/tests/semantic/root-section/default-media-type/basic-bad_Rv1-0.raml"
+//  val apiPath: String = "/Users/lucas.block/mulesoft/PlatformSnapshotAll-plus/small/part2/org_a8a0badd-95dc-4259-ad41-2ac50189b1ce/api_6109_ver_10147/api.raml"
+//  val apiPath: String = "/Users/lucas.block/mulesoft/PlatformSnapshotAll-plus/small/part2/org_a8a0badd-95dc-4259-ad41-2ac50189b1ce/api_6109_ver_7609/api.raml"
+//  val apiPath: String = "/Users/lucas.block/mulesoft/PlatformSnapshotAll-plus/part3-Errors/org_1dec3fc1-ce76-4655-83b4-df9d6b546bc9/api_46065_ver_47765/api.raml"
+//  val apiPath: String = "/Users/lucas.block/mulesoft/current/financial-api/infor-financial-api.raml"
+//  val apiPath: String = "/Users/lucas.block/mulesoft/AMFScalaRunnerV2/run/api.raml"
+//  val apiPath: String = "/Users/lucas.block/Downloads/api_6109_ver_10147/api.raml"
+  val apiPath: String = "/Users/lucas.block/mulesoft/PlatformSnapshotAll-plus/problems/part3-Errors/org_1dec3fc1-ce76-4655-83b4-df9d6b546bc9/api_46065_ver_47765/api.raml"
+//  val apiPath: String = "/Users/lucas.block/mulesoft/PlatformSnapshotAll-plus/small/part1/org_be8f07f1-b04f-4b51-be0e-75c65f54b5ae/api_75818_ver_78924/americanflightapi.raml"
 
 //  val apiKind: APIType = RAML08
   val apiKind: APIType = RAML10
@@ -68,21 +58,10 @@ object App {
       AmfParsingHelper.handleParse(file, apiKind) match {
         case Right(b) =>
           baseUnit = b
-          val str = AMF.raml10Generator().generateString(baseUnit)
           println("AMF PARSING OK")
         case Left(e) => printAndThrow(s"AMF PARSING ERROR: ${e.getMessage}", e)
       }
     }
-
-//    if (AMF_PARSING) {
-//      AmfParsingHelper.handleParse(file2, apiKind) match {
-//        case Right(b) =>
-//          baseUnit = b
-//          val str = AMF.raml10Generator().generateString(baseUnit)
-//          println("AMF PARSING OK")
-//        case Left(e) => printAndThrow(s"AMF PARSING ERROR: ${e.getMessage}", e)
-//      }
-//    }
 
     if (AMF_VALIDATION) {
 
@@ -159,14 +138,6 @@ object App {
     if (RAML_PARSER) {
       val results = RamlValidationService.createDefault.validate(file.getAbsolutePath)
       print("Java Parser" +  results)
-//      RamlParsingValidationHelper.handleParseValidation(file) match {
-//        case Right(result) => {
-//          println("JAVA PARSING/VALIDATION OK")
-//          println("JAVA PARSING/VALIDATION Validation Results" + result.getValidationResults.asScala.map("Message =" + _.getMessage).toList)
-//
-//        }
-//        case Left(e) => printAndThrow(s"JAVA PARSING/VALIDATION ERROR: ${e.getMessage}", e)
-//      }
     }
 
     if (SWAGGER_PARSER) {

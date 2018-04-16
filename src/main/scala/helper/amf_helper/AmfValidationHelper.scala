@@ -1,20 +1,19 @@
 package helper.amf_helper
 
-import amf.{AMF, ProfileNames}
-import amf.core.remote.RamlYamlHint
-import amf.facades.{AMFCompiler, Validation}
-import amf.validation.{AMFValidationReport, AMFValidationResult}
-import amf.model.document.BaseUnit
-import amf.plugins.document.webapi.RAML10Plugin
+import amf.client.AMF
+import amf.client.model.document.BaseUnit
+import amf.client.validate.{ValidationReport, ValidationResult, Validator}
 import core.APIS.APIType
 
-import scala.concurrent.Future
 
 object AmfValidationHelper {
 
-  def handleValidation(kind: APIType, baseUnit: BaseUnit): Either[Throwable, AMFValidationReport] = {
+  def handleValidation(kind: APIType, baseUnit: BaseUnit): Either[Throwable, ValidationReport] = {
     try {
+      val start = System.nanoTime()
       val report = validate(kind, baseUnit)
+      val elapsed = (System.nanoTime() - start) / 1000000
+      println(s"AMF.validate took $elapsed milliseconds")
       Right(report)
     } catch {
       case s: StackOverflowError => Left(s)
@@ -22,11 +21,11 @@ object AmfValidationHelper {
     }
   }
 
-  private def validate(kind: APIType, baseUnit: BaseUnit): AMFValidationReport = {
+  private def validate(kind: APIType, baseUnit: BaseUnit): ValidationReport = {
     AMF.validate(baseUnit, kind.label, kind.label).get()
   }
 
-  def handleValidationResults(amfResults: List[AMFValidationResult]): String = {
+  def handleValidationResults(amfResults: List[ValidationResult]): String = {
     val resultsGroups = amfResults.groupBy(_.level)
     s"""|Violations:
         |${resultsGroups.filter(_._1 == "Violation").flatMap(_._2).map(e => "Message: " + e.message + "; Position: " + e.position).mkString("/")}

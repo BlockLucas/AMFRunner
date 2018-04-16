@@ -1,7 +1,7 @@
 package helper.amf_helper
 
-import amf.core.client.Resolver
-import amf.model.document.BaseUnit
+import amf.client.model.document.BaseUnit
+import amf.client.resolve.Resolver
 import core.APIS.APIType
 import core.ObjectsHandler
 
@@ -10,7 +10,10 @@ object AmfResolutionHelper {
   def handleResolution(kind: APIType, baseUnit: BaseUnit): Either[Throwable, BaseUnit] = {
     println("about to resolve")
     try {
+        val start = System.nanoTime()
         val b = resolve(baseUnit, kind)
+        val elapsed = (System.nanoTime() - start) / 1000000
+        println(s"AMF.resolve took $elapsed milliseconds")
         println("resolved")
         Right(b)
     } catch {

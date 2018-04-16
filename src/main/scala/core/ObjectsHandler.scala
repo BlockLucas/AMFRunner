@@ -1,8 +1,11 @@
 package core
 
 import amf._
-import amf.core.client.{Generator, Parser, Resolver}
 import APIS._
+import amf.client.AMF
+import amf.client.parse._
+import amf.client.render._
+import amf.client.resolve._
 import io.swagger.parser.SwaggerParser
 import org.raml.v2.api.RamlModelBuilder
 
@@ -27,12 +30,12 @@ object ObjectsHandler {
     }
   }
 
-  def createGenerator(apiType: APIType): Generator = {
+  def createGenerator(apiType: APIType): Renderer = {
     apiType match {
-      case RAML10 => AMF.raml10Generator()
-      case RAML08 => AMF.raml08Generator()
-      case OAS20 => AMF.oas20Generator()
-      case JSON_LD => AMF.amfGraphGenerator()
+      case RAML10 => new Raml10Renderer()
+      case RAML08 => new Raml08Renderer()
+      case OAS20 => new Oas20Renderer()
+      case JSON_LD => new AmfGraphRenderer()
       case _ => throw new IllegalArgumentException()
     }
   }

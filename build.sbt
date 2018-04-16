@@ -11,10 +11,9 @@ val settings = Common.settings ++ Seq(
   version := "0.0.1",
 
   libraryDependencies ++= Seq(
-    "org.mule.amf" %% "amf-client" % "1.3.0-SNAPSHOT",
-    "org.raml" % "raml-parser-2" % "1.0.17",
-    "org.raml" % "raml-parser-2" % "1.0.17",
-    "org.raml" % "raml-parser" % "0.8.21",
+    "org.mule.amf" %% "amf-client" % "1.4.0-SNAPSHOT",
+    "org.raml" % "raml-parser-2" % "1.0.21-SNAPSHOT",
+    "org.raml" % "raml-parser" % "0.9-SNAPSHOT",
     "io.swagger" % "swagger-parser" % "1.0.33",
     "com.typesafe.play" %% "play-json" % "2.6.3",
     "com.lihaoyi" %% "scalatags" % "0.6.7",
@@ -25,7 +24,7 @@ val settings = Common.settings ++ Seq(
     "org.scalatest" %% "scalatest" % "3.0.0" % Test,
     "io.spray" %%  "spray-json" % "1.3.3"
   ),
-  resolvers ++= List(Common.releasesPublic, Common.snapshots, Common.external, Resolver.mavenLocal),
+  resolvers ++= List(Common.releases, Common.snapshots, Resolver.mavenLocal),
   credentials ++= Common.credentials(),
 
   // Redefining publish for valkyr pipeline, which includes a publish task
