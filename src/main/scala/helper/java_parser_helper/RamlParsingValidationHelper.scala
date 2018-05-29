@@ -2,25 +2,44 @@ package helper.java_parser_helper
 
 import java.io.File
 
-import core.ObjectsHandler
-import org.raml.v2.api.RamlModelResult
+import core.APIS.{APIType, RAML08}
+import org.raml.parser.rule.ValidationResult.Level
+import scala.collection.JavaConverters._
 
 object RamlParsingValidationHelper {
 
-  def handleParseValidation(file: File): Either[Exception, RamlModelResult] = {
+  def getValidationErrors(file : File, apiKind: APIType): Either[Throwable, List[String]] = {
     try {
-      val result = parseVal(file)
-      Right(result)
+      if (apiKind == RAML08) {
+        // 0.8 use v1
+        val validatorService = JavaParserHandler.getValidatorServiceV1
+        validatorService.validate(file.getAbsolutePath).asScala.filter(_.getLevel == Level.ERROR) match {
+          case result =>
+            if (result.nonEmpty) {
+              Right(result.map(_.getMessage).toList)
+            } else {
+              Right(List.empty)
+            }
+        }
+      } else {
+        // 1.0 use v2
+        val parser = JavaParserHandler.getParserV2(file.getParentFile.getPath)
+        parser.buildApi(file)
+          match {
+          case result => {
+            if (result.hasErrors) {
+              Right(result.getValidationResults.asScala.map(_.getMessage).toList)
+            } else {
+              Right(List.empty)
+            }
+          }
+        }
+      }
     } catch {
-      case e: Exception => Left(e)
+      case e: Throwable =>
+        println(s"ERROR Java Parser/Validator. File: $file - ${e.getMessage}", e)
+        Left(e)
     }
-  }
-
-  private def parseVal(file: File): RamlModelResult = {
-    val parser = ObjectsHandler.createJavaParserBuilder()
-    val result = parser.buildApi(file)
-    if (result.hasErrors) throw new Exception("RAML parser with errors = " + result.getValidationResults)
-    result
   }
 
 }

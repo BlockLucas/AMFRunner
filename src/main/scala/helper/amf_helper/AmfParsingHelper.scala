@@ -10,15 +10,18 @@ object AmfParsingHelper {
 
   def handleParse(file: File, kind: APIType): Either[Exception,  BaseUnit] =  {
     println("about to parse")
+    val start = System.nanoTime()
     try {
-        val start = System.nanoTime()
         val baseUnit = parse(file, kind)
+        println("parsed")
         val elapsed = (System.nanoTime() - start) / 1000000
         println(s"AMF.parseFileAsync took $elapsed milliseconds")
-        println("parsed")
         Right(baseUnit)
     } catch {
-      case e: Exception => Left(e)
+      case e: Exception =>
+        val elapsed = (System.nanoTime() - start) / 1000000
+        println(s"AMF.parseFileAsync took $elapsed milliseconds")
+        Left(e)
     }
   }
 

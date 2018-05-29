@@ -9,7 +9,7 @@ object YamlParsingHelper {
 
   def handleParse(file: File): Either[Exception,  Unit] =  {
     try {
-      val parts = YamlParser(FileUtils.readFileContent(file)).parse()
+      YamlParser(FileUtils.readFileContent(file)).parse()
       Right()
     } catch {
       case e: Exception => Left(e)

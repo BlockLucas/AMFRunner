@@ -22,6 +22,7 @@ object AmfValidationHelper {
   }
 
   private def validate(kind: APIType, baseUnit: BaseUnit): ValidationReport = {
+    println("about to validate")
     AMF.validate(baseUnit, kind.label, kind.label).get()
   }
 
