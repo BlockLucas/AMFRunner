@@ -11,7 +11,7 @@ val settings = Common.settings ++ Seq(
   version := "0.0.1",
 
   libraryDependencies ++= Seq(
-    "org.mule.amf" %% "amf-client" % "1.4.0-SNAPSHOT",
+    "org.mule.amf" %% "amf-client" % "1.5.0-SNAPSHOT",
     "org.raml" % "raml-parser-2" % "1.0.23-SNAPSHOT",
     "org.raml" % "raml-parser" % "0.9-SNAPSHOT",
     "io.swagger" % "swagger-parser" % "1.0.33",
