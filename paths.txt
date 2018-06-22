@@ -84,3 +84,11 @@
 /Users/lucas.block/mulesoft/AMFScalaRunnerV2/run/19c5f124-267f-47b2-9864-57ab60b26f73/api.raml
 /Users/lucas.block/mulesoft/AMFScalaRunnerV2/run/api-v11-1.0.0-fat-raml/api.raml
 /Users/lucas.block/AWSDownloads/Unzipped/All/a1f7991a-2ab8-4376-9717-68348e20afe8/3d709afa-8aed-46d3-8ace-0a4b7e9328d5/PO.raml
+/Users/lucas.block/AWSDownloads/Unzipped/All/3dab727d-b742-4b70-9893-9b8ab35a8ad1/2596ca7d-8526-496a-9fb9-5cbc0bee0896/flight-api.raml
+/Users/lucas.block/AWSDownloads/Unzipped/All/43ce019d-f13a-4391-a0d8-f0bbabdeef46/a1643a5c-34bf-4de9-b7bf-56791eb5d26e/api.raml
+/Users/lucas.block/AWSDownloads/Unzipped/All/3dab727d-b742-4b70-9893-9b8ab35a8ad1/66c830af-8320-4eb9-b841-173e19a15411/api.raml
+/Users/lucas.block/AWSDownloads/Unzipped/All/3dab727d-b742-4b70-9893-9b8ab35a8ad1/49f4c840-666a-4f78-afa9-031d5b627c80/api.raml
+/Users/lucas.block/AWSDownloads/Unzipped/All/e0eb047d-0cbf-4ee2-949b-2d21695b6402/a6034953-6036-427b-93ac-cf78d8ee2231/funds-prof.raml
+/Users/lucas.block/AWSDownloads/Unzipped/All/af123c17-d527-4f4a-a0c9-f38e6c98ba5c/202f3d53-b711-4d0d-b0fc-901e5203a43b/api.raml
+/Users/lucas.block/AWSDownloads/Unzipped/All/41a004ae-d95f-4c3b-9df9-94bf4102940c/e6de40fe-189f-4e9f-b9bd-a02424e3c435/api.raml
+/Users/lucas.block/AWSDownloads/Unzipped/All/42e307e8-3f06-4f3f-9465-8613b141c5c8/ee047d76-1f80-47dc-a324-67e75db3c768/api.raml
