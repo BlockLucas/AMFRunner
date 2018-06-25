@@ -11,12 +11,11 @@ import org.raml.v2.api.RamlModelBuilder
 
 object ObjectsHandler {
 
-  def getProfileName(parser: Parser): String = {
-    parser match {
-      case _: Raml10Parser => ProfileNames.RAML
-      case _: Raml08Parser => ProfileNames.RAML
-      case _: Oas20Parser => ProfileNames.OAS
-      case _: AmfGraphParser => ProfileNames.AMF
+  def getProfileName(kind: APIType): ProfileNames.ProfileName = {
+    kind match {
+      case RAML10 => ProfileNames.RAML
+      case RAML08 => ProfileNames.RAML08
+      case OAS20 => ProfileNames.OAS
     }
   }
 

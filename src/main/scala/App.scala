@@ -18,15 +18,15 @@ object App {
   val AMF_VALIDATION: Boolean = true
   val AMF_DOUBLE_VALIDATION: Boolean = false
   val AMF_RESOLUTION: Boolean = false
-  val RAML_PARSER: Boolean = false
+  val RAML_PARSER: Boolean = true
   val RAML_DOUBLE_PARSER: Boolean = false
   val SWAGGER_PARSER: Boolean = false
   val SWAGGER_VALIDATION: Boolean = false
 
 
-//  val apiPath: String = "/Users/lucas.block/mulesoft/AMFScalaRunnerV2/run/testfile2.raml"
-  val apiPath: String = "/Users/lucas.block/AWSDownloads/Unzipped/All/3dab727d-b742-4b70-9893-9b8ab35a8ad1/bfbfdb27-830d-4806-bd2b-8fbbce991bd0/lob-api.raml"
-//  val apiPath: String = "/Users/lucas.block/mulesoft/current/runner/gard-el-gard-api-1.0.3-fat-raml/api.raml"
+  val apiPath: String = "/Users/lucas.block/mulesoft/AMFScalaRunnerV2/run/testfile2.raml"
+//  val apiPath: String = "/Users/lucas.block/mulesoft/current/runner/muse-api-1.0.0-fat-raml/api.raml"
+//  val apiPath: String = "/Users/lucas.block/mulesoft/current/runner/servicenow-1.0.4-fat-raml/servicenow.raml"
 
   val apiKind: APIType = RAML10
 //  val apiKind: APIType = RAML08

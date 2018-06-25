@@ -92,3 +92,5 @@
 /Users/lucas.block/AWSDownloads/Unzipped/All/af123c17-d527-4f4a-a0c9-f38e6c98ba5c/202f3d53-b711-4d0d-b0fc-901e5203a43b/api.raml
 /Users/lucas.block/AWSDownloads/Unzipped/All/41a004ae-d95f-4c3b-9df9-94bf4102940c/e6de40fe-189f-4e9f-b9bd-a02424e3c435/api.raml
 /Users/lucas.block/AWSDownloads/Unzipped/All/42e307e8-3f06-4f3f-9465-8613b141c5c8/ee047d76-1f80-47dc-a324-67e75db3c768/api.raml
+/Users/lucas.block/AWSDownloads/Unzipped/All/3dab727d-b742-4b70-9893-9b8ab35a8ad1/e42a68c7-a5ef-460c-b605-c35e3924e219/api.raml
+/Users/lucas.block/AWSDownloads/Unzipped/All/231129e8-07db-4665-abe5-4e6c4c9fbe0a/e8dda52c-61a9-466b-afd6-e4ad577e26b7/api.raml
