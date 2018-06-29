@@ -1,9 +1,9 @@
 package helper.amf_helper
 
-import amf.ProfileNames.AMFStyle
+import amf.AMFStyle
 import amf.client.AMF
 import amf.client.model.document.BaseUnit
-import amf.client.validate.{ValidationReport, ValidationResult, Validator}
+import amf.client.validate.{ValidationReport, ValidationResult}
 import core.APIS.APIType
 import core.ObjectsHandler
 
@@ -26,7 +26,7 @@ object AmfValidationHelper {
   private def validate(kind: APIType, baseUnit: BaseUnit): ValidationReport = {
     println("about to validate")
     val profile = ObjectsHandler.getProfileName(kind)
-    AMF.validate(baseUnit, profile, AMFStyle).get()
+    AMF.validate(baseUnit, profile.profile, AMFStyle.profileName.profile).get()
   }
 
   def handleValidationResults(amfResults: List[ValidationResult]): String = {

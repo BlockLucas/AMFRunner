@@ -17,15 +17,15 @@ object App {
   val AMF_PARSING: Boolean = false
   val AMF_VALIDATION: Boolean = true
   val AMF_DOUBLE_VALIDATION: Boolean = false
-  val AMF_RESOLUTION: Boolean = false
+  val AMF_RESOLUTION: Boolean = true
   val RAML_PARSER: Boolean = true
   val RAML_DOUBLE_PARSER: Boolean = false
   val SWAGGER_PARSER: Boolean = false
   val SWAGGER_VALIDATION: Boolean = false
 
 
-  val apiPath: String = "/Users/lucas.block/mulesoft/AMFScalaRunnerV2/run/testfile2.raml"
-//  val apiPath: String = "/Users/lucas.block/mulesoft/current/runner/muse-api-1.0.0-fat-raml/api.raml"
+//  val apiPath: String = "/Users/lucas.block/mulesoft/AMFScalaRunnerV2/run/testfile2.raml"
+  val apiPath: String = "/Users/lucas.block/mulesoft/current/runner/esignature.rest.swagger.raml"
 //  val apiPath: String = "/Users/lucas.block/mulesoft/current/runner/servicenow-1.0.4-fat-raml/servicenow.raml"
 
   val apiKind: APIType = RAML10

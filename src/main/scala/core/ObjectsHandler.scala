@@ -11,7 +11,7 @@ import org.raml.v2.api.RamlModelBuilder
 
 object ObjectsHandler {
 
-  def getProfileName(kind: APIType): ProfileNames.ProfileName = {
+  def getProfileName(kind: APIType): ProfileName = {
     kind match {
       case RAML10 => ProfileNames.RAML
       case RAML08 => ProfileNames.RAML08
