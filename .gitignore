@@ -3,4 +3,5 @@
 /project/target/
 /project/project/target/
 /run/
+/src/main/js/node_modules
 .DS_Store

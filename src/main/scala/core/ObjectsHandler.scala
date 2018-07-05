@@ -16,6 +16,7 @@ object ObjectsHandler {
       case RAML10 => ProfileNames.RAML
       case RAML08 => ProfileNames.RAML08
       case OAS20 => ProfileNames.OAS
+      case _ => ProfileNames.AMF
     }
   }
 

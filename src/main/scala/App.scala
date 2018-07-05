@@ -16,21 +16,20 @@ object App {
   val YAML: Boolean = false
   val AMF_PARSING: Boolean = false
   val AMF_VALIDATION: Boolean = true
-  val AMF_DOUBLE_VALIDATION: Boolean = false
   val AMF_RESOLUTION: Boolean = true
+
+  val AMF_DOUBLE_VALIDATION: Boolean = false
+
   val RAML_PARSER: Boolean = true
-  val RAML_DOUBLE_PARSER: Boolean = false
   val SWAGGER_PARSER: Boolean = false
   val SWAGGER_VALIDATION: Boolean = false
 
+  val RAML_DOUBLE_PARSER: Boolean = false
 
-//  val apiPath: String = "/Users/lucas.block/mulesoft/AMFScalaRunnerV2/run/testfile2.raml"
-  val apiPath: String = "/Users/lucas.block/mulesoft/current/runner/esignature.rest.swagger.raml"
-//  val apiPath: String = "/Users/lucas.block/mulesoft/current/runner/servicenow-1.0.4-fat-raml/servicenow.raml"
+  // Full Path of the master API
+  val apiPath: String = ""
 
-  val apiKind: APIType = RAML10
-//  val apiKind: APIType = RAML08
-//  val apiKind: APIType = OAS20
+  val apiKind: APIType = RAML10 //RAML10, RAML08, OAS20, JSON_LD
 
   def main(args: Array[String]): Unit = {
 
@@ -188,8 +187,8 @@ object App {
       }
     }
 
-    ExecutionLog.finish()
-    ExecutionLog.buildReport
+//    ExecutionLog.finish()
+//    ExecutionLog.buildReport
     println("\n\nFINISH OK")
   }
 
