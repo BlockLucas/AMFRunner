@@ -26,7 +26,7 @@ object AmfValidationHelper {
   private def validate(kind: APIType, baseUnit: BaseUnit): ValidationReport = {
     println("about to validate")
     val profile = ObjectsHandler.getProfileName(kind)
-    AMF.validate(baseUnit, profile.profile, AMFStyle.profileName.profile).get()
+    AMF.validate(baseUnit, profile, profile.messageStyle).get()
   }
 
   def handleValidationResults(amfResults: List[ValidationResult]): String = {
