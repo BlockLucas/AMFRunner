@@ -11,6 +11,7 @@ val settings = Common.settings ++ Seq(
     "io.swagger" % "swagger-parser" % "1.0.33"
   ),
   resolvers ++= List(Common.releases, Common.snapshots, Resolver.mavenLocal),
+  resolvers += "jitpack" at "https://jitpack.io",
   credentials ++= Common.credentials(),
 
   // Redefining publish for valkyr pipeline, which includes a publish task

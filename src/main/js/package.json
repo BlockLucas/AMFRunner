@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "amf-client-js": "1.8.0-SNAPSHOT.0",
+    "amf-client-js": "snapshot",
+    "raml-1-parser": "^1.1.45",
     "npm": "^6.1.0"
   }
 }

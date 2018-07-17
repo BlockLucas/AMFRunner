@@ -15,12 +15,12 @@ object App {
 
   val YAML: Boolean = false
   val AMF_PARSING: Boolean = false
-  val AMF_VALIDATION: Boolean = true
-  val AMF_RESOLUTION: Boolean = true
+  val AMF_VALIDATION: Boolean = false
+  val AMF_RESOLUTION: Boolean = false
 
   val AMF_DOUBLE_VALIDATION: Boolean = false
 
-  val RAML_PARSER: Boolean = true
+  val RAML_PARSER: Boolean = false
   val SWAGGER_PARSER: Boolean = false
   val SWAGGER_VALIDATION: Boolean = false
 
