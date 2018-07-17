@@ -16,7 +16,7 @@ const VALIDATION_RESOLUTION = false;
 amf.plugins.document.WebApi.register();
 amf.plugins.document.Vocabularies.register();
 amf.plugins.features.AMFValidation.register();
-amf.Core.init().then ( function () {
+amf.AMF.init().then ( function () {
     console.log("File: " + masterApiPath);
 
     if (PARSE) {
@@ -42,6 +42,7 @@ amf.Core.init().then ( function () {
                     function(report) {
                         if (report.conforms) {
                             console.log("Validation OK");
+                            console.log(report.toString());
                         } else {
                             console.log("Validation Error");
                             console.log(report.toString());
