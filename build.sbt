@@ -1,5 +1,12 @@
 //val ivyLocal = Resolver.file("ivy", file(Path.userHome.absolutePath + "/.ivy2/local"))(Resolver.ivyStylePatterns)
 
+initialize := {
+  val _ = initialize.value
+  if (sys.props("java.specification.version") != "1.8")
+    sys.error("Java 8 is required for this project.")
+}
+
+
 val settings = Common.settings ++ Seq(
   name := "amf-runner",
   version := "0.0.1",

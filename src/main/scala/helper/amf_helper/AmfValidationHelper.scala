@@ -32,7 +32,7 @@ object AmfValidationHelper {
   def handleValidationResults(amfResults: List[ValidationResult]): String = {
     val resultsGroups = amfResults.groupBy(_.level)
     s"""|Violations:
-        |${resultsGroups.filter(_._1 == "Violation").flatMap(_._2).map(e => "Message: " + e.message + "; Position: " + e.position).mkString("/")}
+        |${resultsGroups.filter(_._1 == "Violation").flatMap(_._2).map(e => "Message: " + e.message + "; Position: " + e.position + "; location: " + e.location).mkString("/")}
         |Warnings:
         |${resultsGroups.filter(_._1 == "Warning").flatMap(_._2).map(e => "Message: " + e.message + "; Position: " + e.position).mkString("/")}"""
   }

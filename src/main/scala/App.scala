@@ -4,7 +4,7 @@ import amf.client.AMF
 import amf.client.model.document.BaseUnit
 import amf.core.benchmark.ExecutionLog
 import core.APIS._
-import helper.amf_helper.{AmfParsingHelper, AmfResolutionHelper, AmfValidationHelper}
+import helper.amf_helper.{AmfGenerationHelper, AmfParsingHelper, AmfResolutionHelper, AmfValidationHelper}
 import helper.java_parser_helper.RamlParsingValidationHelper
 import helper.swagger_parser_validator.{SwaggerParsingHelper, SwaggerValidationHelper}
 import helper.yaml_helper.YamlParsingHelper
@@ -14,8 +14,9 @@ import scala.collection.JavaConverters._
 object App {
 
   val YAML: Boolean = false
-  val AMF_PARSING: Boolean = false
+  val AMF_PARSING: Boolean = true
   val AMF_VALIDATION: Boolean = false
+  val AMF_VALIDATION_ITERATE: Boolean = false
   val AMF_RESOLUTION: Boolean = false
 
   val AMF_DOUBLE_VALIDATION: Boolean = false
@@ -25,6 +26,7 @@ object App {
   val SWAGGER_VALIDATION: Boolean = false
 
   val RAML_DOUBLE_PARSER: Boolean = false
+  val GENERATE: Boolean = false
 
   // Full Path of the master API
   val apiPath: String = ""
@@ -79,6 +81,43 @@ object App {
         case Left(e) => printAndThrow(s"AMF VALIDATION ERROR: ${e.getMessage}", e)
       }
     }
+
+    if (AMF_VALIDATION_ITERATE) {
+      var i: Double = 0
+      var success: Double = 0
+      var unsuccess: Double = 0
+      var baseUnitIterate: BaseUnit = null
+
+      while(true){
+        i = i + 1
+        AmfParsingHelper.handleParse(file, apiKind) match {
+          case Right(b) =>
+            baseUnitIterate = b
+            println("AMF PARSING OK")
+          case Left(e) => {
+            println(s"AMF PARSING ERROR: ${e.getMessage}")
+            unsuccess = unsuccess + 1
+          }
+        }
+
+        if (baseUnitIterate != null) {
+          AmfValidationHelper.handleValidation(apiKind, baseUnitIterate) match {
+            case Right(r) =>
+              if (r.conforms){
+                println("AMF VALIDATION OK")
+                success = success + 1
+              }
+              else {
+                println(s"AMF VALIDATION ERROR: ${AmfValidationHelper.handleValidationResults(r.results.asScala.toList)}")
+                unsuccess = unsuccess + 1
+              }
+            case Left(e) => printAndThrow(s"AMF VALIDATION ERROR: ${e.getMessage}", e)
+          }
+        }
+        println(s"results: \n\tsuccess: $success\n\tunsuccess: $unsuccess\n\ttotal: $i\n\tsuccessrate: ${(success/i)*100}%")
+      }
+    }
+
 
     if (AMF_DOUBLE_VALIDATION) {
 
@@ -135,6 +174,7 @@ object App {
 
     if (RAML_PARSER) {
       val start = System.nanoTime()
+      println("Java Parser Starting Validation")
       RamlParsingValidationHelper.getValidationErrors(file, apiKind) match {
         case Right(r) =>
           if (r.isEmpty)
@@ -184,6 +224,30 @@ object App {
       SwaggerValidationHelper.handleValidation(file) match {
         case Right(_) => println("SWAGGER VALIDATION OK")
         case Left(e) => println(s"SWAGGER VALIDATION ERROR: $e")
+      }
+    }
+
+    if (GENERATE) {
+      var baseUnit: BaseUnit = null
+
+      AmfParsingHelper.handleParse(file, apiKind) match {
+        case Right(b) =>
+          baseUnit = b
+          println("AMF PARSING OK")
+        case Left(e) => printAndThrow(s"AMF PARSING ERROR: ${e.getMessage}", e)
+      }
+
+      AmfResolutionHelper.handleResolution(apiKind, baseUnit) match {
+        case Right(b) =>
+          baseUnit = b
+          println("AMF RESOLUTION-RESOLUTION OK")
+        case Left(e) => printAndThrow(s"AMF RESOLUTION ERROR: ${e.getMessage}", e)
+      }
+
+      val targetFile = new File("/Users/lucas.block/mulesoft/AMFScalaRunnerV2/run/target.raml")
+      AmfGenerationHelper.handleGen(targetFile, apiKind, baseUnit) match {
+        case Right(_) => println("AMF GENERATION OK")
+        case Left(e) => printAndThrow(s"AMF GENERATION ERROR: ${e.getMessage}", e)
       }
     }
 

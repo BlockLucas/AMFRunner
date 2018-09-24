@@ -9,7 +9,7 @@ import core.ObjectsHandler
 object AmfParsingHelper {
 
   def handleParse(file: File, kind: APIType): Either[Exception,  BaseUnit] =  {
-    println("about to parse")
+    println("about to parse with AMF")
     val start = System.nanoTime()
     try {
         val baseUnit = parse(file, kind)
